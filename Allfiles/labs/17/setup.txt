@@ -15,15 +15,16 @@ async function main() {
   {
 
     // Generate a random order
-    var p = Math.floor(Math.random() * 10) + 1;
-    var q = Math.floor(Math.random() * 3) + 1;
+    var p = Math.floor(Math.random() * 15) + 1;
+    var q = Math.floor(Math.random() * 25) + 1;
+    var c = Math.floor(Math.random() * 5) + 1;
     var batch = await producer.createBatch();
-    batch.tryAdd({ body: {ProductID:p, Quantity:q} });   
+    batch.tryAdd({ body: {CategoryID:c, ProductID:p, Quantity:q} });   
 
     // Send the batch to the event hub.
     await producer.sendBatch(batch);
 
-    console.log("{ProductID:" + p + ", Quantity:" + q + "}");
+    console.log("{CategoryID:" + c + ", ProductID:" + p + ", Quantity:" + q + "}");
   }
   // Close the producer client.
     await producer.close();
